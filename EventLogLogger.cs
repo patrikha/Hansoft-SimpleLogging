@@ -23,8 +23,12 @@ namespace Hansoft.SimpleLogging
         public void Initialize(string applicationName)
         {
             this.applicationName = applicationName;
-            if (!EventLog.SourceExists(applicationName))
-                EventLog.CreateEventSource(applicationName, "Application");
+            try
+            {
+                if (!EventLog.SourceExists(applicationName))
+                    EventLog.CreateEventSource(applicationName, "Application");
+            }
+            catch (Exception) { }
         }
 
         /// <summary>
